@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Surveillance Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+  <style>
+    body { background-color: #111827; }
+  </style>
+</head>
+<body class="text-gray-100 font-sans">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { motion } = window["framer-motion"];
+
+    function App() {
+      const logs = [
+        { id: 1, time: "2025-10-27 02:00:15", status: "Unknown Detected", img: "https://placehold.co/200x150/ff5555/fff?text=Unknown+1" },
+        { id: 2, time: "2025-10-27 01:52:09", status: "Unknown Detected", img: "https://placehold.co/200x150/ff8888/fff?text=Unknown+2" },
+        { id: 3, time: "2025-10-27 01:35:44", status: "Known Person", img: "https://placehold.co/200x150/33aa33/fff?text=Known+1" },
+      ];
+
+      return (
+        <div className="min-h-screen flex flex-col">
+          {/* Navbar */}
+          <nav className="bg-gray-900 shadow-lg">
+            <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+              <h1 className="text-2xl font-bold text-blue-400 flex items-center">
+                <i className="fas fa-eye mr-2"></i> AI Surveillance
+              </h1>
+              <div className="space-x-4 text-gray-300">
+                <a href="#" className="hover:text-white">Live Feed</a>
+                <a href="#" className="hover:text-white">Logs</a>
+                <a href="#" className="hover:text-white">Settings</a>
+              </div>
+            </div>
+          </nav>
+
+          {/* Main Dashboard */}
+          <div className="grid grid-cols-4 gap-6 p-6 flex-grow">
+            {/* Left Section */}
+            <div className="col-span-3 space-y-6">
+              <motion.div 
+                className="bg-gray-800 rounded-xl shadow-xl overflow-hidden"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <h2 className="text-xl font-semibold bg-gray-900 px-4 py-3 border-b border-gray-700">
+                  Live Feed
+                </h2>
+                <div className="flex justify-center items-center p-4 bg-gray-900">
+                  <img src="https://placehold.co/800x450/000000/00ff99?text=Live+Camera+Feed" 
+                       alt="Live feed"
+                       className="rounded-lg border border-gray-700 shadow-2xl" />
+                </div>
+              </motion.div>
+
+              {/* Recent Logs */}
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Recent Intruder Logs</h2>
+                <div className="grid grid-cols-3 gap-4">
+                  {logs.map(log => (
+                    <motion.div
+                      key={log.id}
+                      className="bg-gray-800 rounded-lg shadow-lg border border-gray-700 overflow-hidden hover:scale-[1.03] transition-transform"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: log.id * 0.1 }}
+                    >
+                      <img src={log.img} alt={log.status} className="w-full h-32 object-cover"/>
+                      <div className="p-3">
+                        <p className="text-red-400 font-semibold text-sm">{log.status}</p>
+                        <p className="text-gray-400 text-xs mt-1">{log.time}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <div className="col-span-1 space-y-6">
+              <motion.div 
+                className="bg-gray-800 rounded-xl p-5 border border-gray-700"
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h3 className="text-lg font-semibold mb-2">System Status</h3>
+                <p className="text-green-400 font-bold flex items-center">
+                  <i className="fas fa-circle text-xs mr-2 animate-pulse"></i> ACTIVE
+                </p>
+                <p className="text-gray-400 text-sm mt-2">Last Update: 2 mins ago</p>
+              </motion.div>
+
+              <motion.div 
+                className="bg-gray-800 rounded-xl p-5 border border-gray-700"
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <h3 className="text-lg font-semibold mb-2">Stats</h3>
+                <div className="space-y-2 text-sm text-gray-300">
+                  <p>Total Known Faces: <span className="text-blue-400 font-bold">12</span></p>
+                  <p>Unknown Detections: <span className="text-red-400 font-bold">3</span></p>
+                  <p>Alerts Sent: <span className="text-yellow-400 font-bold">2</span></p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <footer className="text-center text-gray-500 py-4 border-t border-gray-800 text-sm">
+            © 2025 GlassWave Surveillance • React + Tailwind UI Demo
+          </footer>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+
+  <script src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script>
+</body>
+</html>

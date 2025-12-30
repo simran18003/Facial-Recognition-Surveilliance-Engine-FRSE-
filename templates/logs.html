@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Activity Log History{% endblock %}
+
+{% block content %}
+    <h2 class="text-3xl font-semibold mb-6 text-gray-100">Full Unauthorized Activity History</h2>
+
+    <div class="bg-gray-800 p-6 rounded-lg shadow-xl">
+        {% if logs %}
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {% for log in logs %}
+                    <div class="bg-gray-900 rounded-lg shadow-xl overflow-hidden border border-red-700/50 transition-transform duration-300 hover:scale-[1.05]">
+                        <div class="h-32 bg-gray-900 flex items-center justify-center overflow-hidden">
+                            <img src="{{ url_for('get_log_image', filename=log.image_file) }}" 
+                                 alt="Unknown Person Snapshot" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-3 text-center">
+                            <p class="text-red-400 font-bold text-sm">UNKNOWN SUBJECT</p>
+                            <p class="text-xs text-gray-400 mt-1">{{ log.timestamp }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-gray-500 py-10 text-xl">
+                <i class="fas fa-check-circle mr-2 text-green-500"></i> No unauthorized access detected. System is secure.
+            </p>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block right_sidebar_content %}
+    <h3 class="text-xl font-semibold text-gray-100 mb-4 border-b border-gray-700 pb-2">Log Summary</h3>
+    
+    <div class="space-y-4">
+        <div class="status-card p-4 rounded-lg">
+            <p class="text-sm text-gray-400">Total Events Logged</p>
+            <p class="text-3xl font-bold text-red-500 mt-1">{{ logs|length if logs else 0 }}</p>
+        </div>
+        <div class="status-card p-4 rounded-lg">
+            <p class="text-sm text-gray-400">Known Subjects Tracked</p>
+            <p class="text-3xl font-bold text-blue-400 mt-1">
+                {{ data['names']|length if data else 0 }}
+            </p>
+        </div>
+        <div class="status-card p-4 rounded-lg text-center">
+            <p class="text-sm text-gray-400">Data Last Updated</p>
+            <p class="text-xs text-white mt-1">Live Update Not Available</p> 
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Surveillance Dashboard{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Dark Theme Background */
+        body {
+            background-color: #1a1a1a; /* Dark background */
+        }
+        /* Style for the dashboard container (similar to the image) */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 3fr 1fr; /* Main area is 3x larger than the side */
+            gap: 20px;
+            max-width: 1400px; /* Wider view for professional look */
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Style for the sidebar cards */
+        .status-card {
+            background-color: #2c2c2c;
+            border: 1px solid #444;
+            transition: transform 0.2s;
+        }
+        .status-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body class="text-gray-100">
+
+    <nav class="bg-gray-800 shadow-lg mb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-blue-400">
+                        <i class="fas fa-eye mr-2"></i> Surveillance Dashboard 
+                    </h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="{{ url_for('index') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md font-medium {% if request.path == url_for('index') %}bg-blue-600{% endif %}">
+                        Live Stream
+                    </a>
+                    <a href="{{ url_for('add_person') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md font-medium {% if request.path == url_for('add_person') %}bg-blue-600{% endif %}">
+                        <i class="fas fa-user-plus mr-1"></i> Register Subject
+                    </a>
+                    <a href="{{ url_for('show_logs') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md font-medium {% if request.path == url_for('show_logs') %}bg-blue-600{% endif %}">
+                        <i class="fas fa-list-alt mr-1"></i> Full Log
+                    </a>
+                    <a href="{{ url_for('login_page') }}" class="text-red-400 hover:text-red-300 px-3 py-2 rounded-md font-medium">
+                        <i class="fas fa-sign-out-alt mr-1"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="dashboard-container">
+        
+        <div class="main-content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="mb-4">
+                        {% for category, message in messages %}
+                            <div class="p-4 rounded-lg font-medium 
+                                {% if category == 'success' %}bg-green-600 text-white{% else %}bg-red-600 text-white{% endif %}" 
+                                role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            {% block content %}{% endblock %}
+        </div>
+
+        <div class="sidebar-content">
+            {% block right_sidebar_content %}{% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>

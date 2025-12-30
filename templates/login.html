@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Login | GlassWave</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" type="image/png">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/glass_style.css') }}">
+</head>
+
+<body>
+    <div class="wave-bg"></div>
+
+    <div class="login-box">
+        <div class="logo">
+            <img src="https://cdn-icons-png.flaticon.com/512/565/565547.png" alt="Security Shield Logo">
+        </div>
+
+        <h2>Security Login</h2>
+        <p>Enter your credentials to access the system</p>
+
+        <form action="{{ url_for('index') }}" method="get">
+            <div class="input-group">
+                <input type="text" placeholder="Username" name="username" required>
+                <i class="fas fa-user"></i>
+            </div>
+
+            <div class="input-group">
+                <input type="password" placeholder="Password" name="password" required>
+                <i class="fas fa-lock"></i>
+            </div>
+
+            <div class="forgot">
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn-login">Login</button>
+        </form>
+        
+        <div class="or">OR</div>
+
+        <div class="social-login">
+            <button class="social-btn" aria-label="Login with Apple">
+                <img src="https://cdn-icons-png.flaticon.com/512/179/179309.png" alt="Apple">
+            </button>
+            <button class="social-btn" aria-label="Login with Google">
+                <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google">
+            </button>
+            <button class="social-btn" aria-label="Login with X">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
+            </button>
+        </div>
+    </div>
+</body>
+</html>

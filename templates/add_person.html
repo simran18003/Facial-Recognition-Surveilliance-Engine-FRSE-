@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Register New Subject{% endblock %}
+
+{% block content %}
+    <h2 class="text-3xl font-semibold mb-6 text-gray-100">Subject Registration (Offline Tool)</h2>
+    
+    <div class="max-w-md mx-auto p-8 bg-gray-800 rounded-lg shadow-xl border border-blue-600/50">
+        
+        <p class="text-lg font-medium text-gray-300 mb-4 flex items-center">
+            <i class="fas fa-terminal text-blue-400 mr-3"></i>
+            Current Known Subjects: <span class="text-blue-400 ml-2 font-bold">{{ known_count }}</span>
+        </p>
+
+        <div class="space-y-4">
+            <h3 class="text-xl font-semibold text-white">How to Add a New Person:</h3>
+            
+            <div class="bg-gray-900 p-4 rounded-lg border border-gray-700">
+                <p class="text-sm text-gray-400 mb-2">Step 1: Stop the Dashboard</p>
+                <code class="block bg-black text-green-400 p-2 rounded-md text-xs">
+                    Press **Ctrl+C** in the terminal where the dashboard is running.
+                </code>
+            </div>
+
+            <div class="bg-gray-900 p-4 rounded-lg border border-gray-700">
+                <p class="text-sm text-gray-400 mb-2">Step 2: Run the Encoding Tool</p>
+                <code class="block bg-black text-yellow-400 p-2 rounded-md text-xs">
+                    python encode_faces.py
+                </code>
+                <p class="text-xs text-gray-500 mt-2">Follow the instructions in the terminal to capture images and encode.</p>
+            </div>
+
+            <div class="bg-gray-900 p-4 rounded-lg border border-gray-700">
+                <p class="text-sm text-gray-400 mb-2">Step 3: Restart Surveillance</p>
+                <code class="block bg-black text-blue-400 p-2 rounded-md text-xs">
+                    python app.py
+                </code>
+            </div>
+            
+            <p class="text-sm text-red-400 pt-3">
+                <i class="fas fa-exclamation-triangle mr-1"></i> The system must be restarted for new faces to be recognized.
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block right_sidebar_content %}
+    <h3 class="text-xl font-semibold text-gray-100 mb-4 border-b border-gray-700 pb-2">Subjects</h3>
+    <div class="status-card p-4 rounded-lg text-center">
+        <p class="text-sm text-gray-400">Total Known Subjects</p>
+        <p class="text-3xl font-bold text-blue-400 mt-1">{{ known_count }}</p>
+    </div>
+{% endblock %}

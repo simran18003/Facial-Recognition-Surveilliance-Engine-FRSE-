@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top left, #0f2027, #203a43, #2c5364);
+    overflow: hidden;
+    color: white;
+}
+
+/* ====== Moving Gradient Wave ====== */
+.wave-bg {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(120deg, #00aaff, #0077ff, #00ffaa, #ff00aa);
+    animation: waveMove 8s ease-in-out infinite alternate;
+    opacity: 0.15;
+    filter: blur(120px);
+    z-index: 0;
+}
+
+@keyframes waveMove {
+    0% { transform: translateX(-25%) rotate(0deg); }
+    100% { transform: translateX(25%) rotate(360deg); }
+}
+
+/* ====== Login Box ====== */
+.login-box {
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    width: 360px;
+    padding: 40px 35px;
+    text-align: center;
+    z-index: 1;
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====== Logo ====== */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.logo img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.6);
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 12px rgba(0,170,255,0.4); }
+    50% { box-shadow: 0 0 22px rgba(0,170,255,0.8); }
+    100% { box-shadow: 0 0 12px rgba(0,170,255,0.4); }
+}
+
+/* ====== Text ====== */
+.login-box h2 {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.login-box p {
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.login-box a {
+    color: #00aaff;
+    text-decoration: none;
+}
+
+/* ====== Inputs ====== */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transition: 0.3s;
+}
+
+.input-group input::placeholder {
+    color: #bbb;
+}
+
+.input-group i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #aaa;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    box-shadow: 0 0 10px #00aaff;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.input-group input:focus + i {
+    color: #00aaff;
+}
+
+/* ====== Forgot password ====== */
+.forgot {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+/* ====== Login Button ====== */
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #00aaff, #0077ff);
+    background-size: 200% 100%;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.4s ease;
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.4);
+}
+
+.btn-login:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.6);
+    background-position: right center;
+}
+
+/* ====== OR divider ====== */
+.or {
+    margin: 25px 0;
+    font-size: 14px;
+    color: #aaa;
+    position: relative;
+}
+
+.or::before, .or::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 35%;
+    height: 1px;
+    background: #444;
+}
+
+.or::before { left: 0; }
+.or::after { right: 0; }
+
+/* ====== Social Buttons ====== */
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.social-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.social-btn img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(100);
+}
+
+.social-btn:hover {
+    background: rgba(0, 170, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.6);
+    transform: scale(1.1);
+}

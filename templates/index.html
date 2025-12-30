@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Live Stream{% endblock %}
+
+{% block content %}
+    <h2 class="text-3xl font-semibold mb-4 text-gray-100 border-b border-gray-700 pb-2">Live Camera Feed</h2>
+
+    <div class="w-full bg-gray-900 rounded-lg shadow-2xl p-2 h-[75vh] flex items-center justify-center overflow-hidden">
+        <img src="{{ url_for('video_feed') }}" alt="Live Facial Recognition Feed" class="rounded-lg w-full h-full object-contain">
+    </div>
+
+    {% endblock %}
+
+{% block right_sidebar_content %}
+    <h3 class="text-xl font-semibold text-gray-100 mb-4 border-b border-gray-700 pb-2">Activity Log</h3>
+    
+    <div class="space-y-4">
+        {% for log in logs[:8] %} <div class="bg-gray-800 p-3 rounded-lg border border-red-900 shadow-inner">
+                <p class="text-red-400 font-bold text-sm flex items-center">
+                    <i class="fas fa-user-secret mr-2"></i> UNKNOWN
+                </p>
+                <p class="text-xs text-gray-400 mt-1">{{ log.timestamp }}</p>
+            </div>
+        {% else %}
+            <p class="text-sm text-gray-500 pt-4 text-center">No recent unauthorized activity.</p>
+        {% endfor %}
+    </div>
+
+    <a href="{{ url_for('show_logs') }}" class="text-sm text-blue-400 hover:text-blue-300 mt-6 block text-center p-2 rounded-md bg-gray-800">
+        View Full Log History →
+    </a>
+{% endblock %}

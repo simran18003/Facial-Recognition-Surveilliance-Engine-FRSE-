@@ -1,20 +1,24 @@
 import cv2
 import face_recognition
 import numpy as np
-import os
 import pickle
 from flask import Flask, render_template, Response, request, redirect, url_for, flash
 from datetime import datetime
 import time
 import csv
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 import threading
 import requests # <-- ADDED IMPORT
 
 # --- TELEGRAM CONSTANTS (YOU MUST EDIT THESE TWO LINES) ---
 # Paste your Bot Token and your personal Chat ID here
-TELEGRAM_BOT_TOKEN = "7548902683:AAFYuMKq8fPACUfHW-DGB5Fw-f7A75ZRbFs" 
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN") 
 # Update this line:
-TELEGRAM_CHAT_ID = "-4882099524"
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 # -----------------------------------------------------------
 
 
@@ -135,10 +139,11 @@ def run_recognition():
                         
                     # 2. Send Telegram Alert (NEW CALL)
                     # We only send the alert if the token is properly configured
-                    if TELEGRAM_BOT_TOKEN != "YOUR_TELEGRAM_BOT_TOKEN_HERE":
+                    if TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID:
                         send_telegram_alert(log_timestamp_str, img_name)
                     else:
-                        print("[WARNING] Telegram alert skipped. Bot token not configured.")
+                        print("[WARNING] Telegram alert skipped. Token or Chat ID missing.")
+
 
         # Drawing logic remains the same
         for (top, right, bottom, left), name in zip(face_locations, face_names):
